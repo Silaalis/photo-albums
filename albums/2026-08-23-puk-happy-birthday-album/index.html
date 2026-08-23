@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Puk Happy Birthday Album</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  html, body { margin:0; height:100%; width:100%; overflow:hidden; background-color:#0b0b0d;
+    
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; overscroll-behavior:none; }
+  .topbar { position:fixed; top:0; left:0; right:0; z-index:5; padding:10px 14px;
+    display:flex; justify-content:space-between; align-items:center; pointer-events:none; }
+  .topbar a { color:rgba(255,255,255,.6); text-decoration:none; font-size:.8rem; pointer-events:auto; }
+  .counter { color:rgba(255,255,255,.6); font-size:.8rem; }
+  .stage { height:100%; max-width:700px; margin:0 auto; display:flex; align-items:center;
+    justify-content:center; padding:44px 10px 26px; }
+  #book { width:min(92vw, 700px); height:min(80vh, 980px); }
+  .page { background:#1c1c1f; overflow:hidden; }
+  .page-content { width:100%; height:100%; display:flex; align-items:center; justify-content:center;
+    position:relative; background:linear-gradient(160deg,#2b2320,#141210 65%); }
+  .page-content img { max-width:100%; max-height:100%; object-fit:contain; display:block;
+    position:relative; z-index:1; box-shadow:0 2px 18px rgba(0,0,0,.45); }
+  .pagenum { position:absolute; bottom:8px; right:12px; color:rgba(255,255,255,.55);
+    font-size:.72rem; letter-spacing:.04em; }
+  .cover { width:100%; height:100%; display:flex; flex-direction:column; align-items:center;
+    justify-content:center; text-align:center; padding:32px 22px; position:relative;
+    background:linear-gradient(160deg,#2b2320,#141210 65%); color:#f1e9de;
+    border:1px solid rgba(255,255,255,.06); overflow:hidden; }
+  .cover::before { content:""; position:absolute; inset:10px; border:1px solid rgba(230,200,150,.28); pointer-events:none; z-index:3; }
+  .cover-photo { position:absolute; inset:0; background-size:cover; background-position:center;
+    opacity:.22; filter:blur(1px) saturate(.7); }
+  .cover h1 { position:relative; font-family:Georgia,"Times New Roman",serif; font-weight:600;
+    font-size:1.6rem; line-height:1.3; margin:0 0 10px; letter-spacing:.01em; }
+  .cover .sub { position:relative; font-size:.8rem; letter-spacing:.12em; text-transform:uppercase;
+    color:#c9b48a; margin:0; }
+  .cover .hint { position:relative; margin-top:26px; font-size:.78rem; color:rgba(241,233,222,.65); }
+  .cover-bg-img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
+    object-position:center center; }
+  .patch { position:absolute; left:0; top:0; width:0; height:0; filter:blur(3px); z-index:1; }
+  .title-on-patch { position:absolute; left:0; top:0; width:0; height:0; z-index:2; display:flex;
+    align-items:center; justify-content:center; overflow:hidden;
+    font-family:Georgia,"Times New Roman",serif; font-weight:700; color:#e7cd97;
+    text-shadow:0 1px 0 rgba(255,255,255,.15), 0 -1px 1px rgba(0,0,0,.6);
+    letter-spacing:.02em; line-height:1.05; padding:2%; text-align:center; }
+  .hint-pill { position:absolute; z-index:2; bottom:4%; left:50%; transform:translateX(-50%);
+    background:rgba(0,0,0,.55); color:#f1e9de; font-size:.72rem; padding:6px 14px;
+    border-radius:20px; white-space:nowrap; }
+  .backcover { width:100%; height:100%; display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(160deg,#2b2320,#141210 65%); color:rgba(241,233,222,.5);
+    font-family:Georgia,"Times New Roman",serif; font-size:.95rem; letter-spacing:.06em; }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="../../index.html">&larr; All albums</a>
+  <span class="counter" id="counter"></span>
+</div>
+<div class="stage">
+  <div id="book">
+    <div class="page" data-density="hard">
+      <div class="cover">
+        <div class="cover-photo" style="background-image:url('thumbs/001.jpg')"></div>
+        <h1>Puk Happy Birthday Album</h1>
+        <p class="sub">323 Photos</p>
+        <p class="hint">Tap or swipe to open &rarr;</p>
+      </div>
+    </div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/001.jpg" loading="lazy" alt=""><span class="pagenum">1 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/002.jpg" loading="lazy" alt=""><span class="pagenum">2 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/003.jpg" loading="lazy" alt=""><span class="pagenum">3 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/004.jpg" loading="lazy" alt=""><span class="pagenum">4 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/005.jpg" loading="lazy" alt=""><span class="pagenum">5 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/006.jpg" loading="lazy" alt=""><span class="pagenum">6 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/007.jpg" loading="lazy" alt=""><span class="pagenum">7 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/008.jpg" loading="lazy" alt=""><span class="pagenum">8 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/009.jpg" loading="lazy" alt=""><span class="pagenum">9 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/010.jpg" loading="lazy" alt=""><span class="pagenum">10 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/011.jpg" loading="lazy" alt=""><span class="pagenum">11 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/012.jpg" loading="lazy" alt=""><span class="pagenum">12 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/013.jpg" loading="lazy" alt=""><span class="pagenum">13 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/014.jpg" loading="lazy" alt=""><span class="pagenum">14 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/015.jpg" loading="lazy" alt=""><span class="pagenum">15 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/016.jpg" loading="lazy" alt=""><span class="pagenum">16 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/017.jpg" loading="lazy" alt=""><span class="pagenum">17 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/018.jpg" loading="lazy" alt=""><span class="pagenum">18 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/019.jpg" loading="lazy" alt=""><span class="pagenum">19 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/020.jpg" loading="lazy" alt=""><span class="pagenum">20 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/021.jpg" loading="lazy" alt=""><span class="pagenum">21 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/022.jpg" loading="lazy" alt=""><span class="pagenum">22 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/023.jpg" loading="lazy" alt=""><span class="pagenum">23 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/024.jpg" loading="lazy" alt=""><span class="pagenum">24 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/025.jpg" loading="lazy" alt=""><span class="pagenum">25 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/026.jpg" loading="lazy" alt=""><span class="pagenum">26 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/027.jpg" loading="lazy" alt=""><span class="pagenum">27 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/028.jpg" loading="lazy" alt=""><span class="pagenum">28 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/029.jpg" loading="lazy" alt=""><span class="pagenum">29 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/030.jpg" loading="lazy" alt=""><span class="pagenum">30 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/031.jpg" loading="lazy" alt=""><span class="pagenum">31 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/032.jpg" loading="lazy" alt=""><span class="pagenum">32 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/033.jpg" loading="lazy" alt=""><span class="pagenum">33 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/034.jpg" loading="lazy" alt=""><span class="pagenum">34 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/035.jpg" loading="lazy" alt=""><span class="pagenum">35 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/036.jpg" loading="lazy" alt=""><span class="pagenum">36 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/037.jpg" loading="lazy" alt=""><span class="pagenum">37 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/038.jpg" loading="lazy" alt=""><span class="pagenum">38 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/039.jpg" loading="lazy" alt=""><span class="pagenum">39 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/040.jpg" loading="lazy" alt=""><span class="pagenum">40 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/041.jpg" loading="lazy" alt=""><span class="pagenum">41 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/042.jpg" loading="lazy" alt=""><span class="pagenum">42 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/043.jpg" loading="lazy" alt=""><span class="pagenum">43 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/044.jpg" loading="lazy" alt=""><span class="pagenum">44 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/045.jpg" loading="lazy" alt=""><span class="pagenum">45 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/046.jpg" loading="lazy" alt=""><span class="pagenum">46 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/047.jpg" loading="lazy" alt=""><span class="pagenum">47 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/048.jpg" loading="lazy" alt=""><span class="pagenum">48 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/049.jpg" loading="lazy" alt=""><span class="pagenum">49 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/050.jpg" loading="lazy" alt=""><span class="pagenum">50 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/051.jpg" loading="lazy" alt=""><span class="pagenum">51 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/052.jpg" loading="lazy" alt=""><span class="pagenum">52 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/053.jpg" loading="lazy" alt=""><span class="pagenum">53 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/054.jpg" loading="lazy" alt=""><span class="pagenum">54 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/055.jpg" loading="lazy" alt=""><span class="pagenum">55 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/056.jpg" loading="lazy" alt=""><span class="pagenum">56 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/057.jpg" loading="lazy" alt=""><span class="pagenum">57 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/058.jpg" loading="lazy" alt=""><span class="pagenum">58 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/059.jpg" loading="lazy" alt=""><span class="pagenum">59 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/060.jpg" loading="lazy" alt=""><span class="pagenum">60 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/061.jpg" loading="lazy" alt=""><span class="pagenum">61 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/062.jpg" loading="lazy" alt=""><span class="pagenum">62 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/063.jpg" loading="lazy" alt=""><span class="pagenum">63 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/064.jpg" loading="lazy" alt=""><span class="pagenum">64 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/065.jpg" loading="lazy" alt=""><span class="pagenum">65 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/066.jpg" loading="lazy" alt=""><span class="pagenum">66 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/067.jpg" loading="lazy" alt=""><span class="pagenum">67 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/068.jpg" loading="lazy" alt=""><span class="pagenum">68 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/069.jpg" loading="lazy" alt=""><span class="pagenum">69 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/070.jpg" loading="lazy" alt=""><span class="pagenum">70 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/071.jpg" loading="lazy" alt=""><span class="pagenum">71 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/072.jpg" loading="lazy" alt=""><span class="pagenum">72 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/073.jpg" loading="lazy" alt=""><span class="pagenum">73 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/074.jpg" loading="lazy" alt=""><span class="pagenum">74 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/075.jpg" loading="lazy" alt=""><span class="pagenum">75 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/076.jpg" loading="lazy" alt=""><span class="pagenum">76 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/077.jpg" loading="lazy" alt=""><span class="pagenum">77 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/078.jpg" loading="lazy" alt=""><span class="pagenum">78 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/079.jpg" loading="lazy" alt=""><span class="pagenum">79 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/080.jpg" loading="lazy" alt=""><span class="pagenum">80 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/081.jpg" loading="lazy" alt=""><span class="pagenum">81 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/082.jpg" loading="lazy" alt=""><span class="pagenum">82 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/083.jpg" loading="lazy" alt=""><span class="pagenum">83 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/084.jpg" loading="lazy" alt=""><span class="pagenum">84 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/085.jpg" loading="lazy" alt=""><span class="pagenum">85 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/086.jpg" loading="lazy" alt=""><span class="pagenum">86 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/087.jpg" loading="lazy" alt=""><span class="pagenum">87 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/088.jpg" loading="lazy" alt=""><span class="pagenum">88 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/089.jpg" loading="lazy" alt=""><span class="pagenum">89 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/090.jpg" loading="lazy" alt=""><span class="pagenum">90 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/091.jpg" loading="lazy" alt=""><span class="pagenum">91 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/092.jpg" loading="lazy" alt=""><span class="pagenum">92 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/093.jpg" loading="lazy" alt=""><span class="pagenum">93 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/094.jpg" loading="lazy" alt=""><span class="pagenum">94 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/095.jpg" loading="lazy" alt=""><span class="pagenum">95 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/096.jpg" loading="lazy" alt=""><span class="pagenum">96 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/097.jpg" loading="lazy" alt=""><span class="pagenum">97 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/098.jpg" loading="lazy" alt=""><span class="pagenum">98 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/099.jpg" loading="lazy" alt=""><span class="pagenum">99 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/100.jpg" loading="lazy" alt=""><span class="pagenum">100 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/101.jpg" loading="lazy" alt=""><span class="pagenum">101 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/102.jpg" loading="lazy" alt=""><span class="pagenum">102 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/103.jpg" loading="lazy" alt=""><span class="pagenum">103 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/104.jpg" loading="lazy" alt=""><span class="pagenum">104 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/105.jpg" loading="lazy" alt=""><span class="pagenum">105 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/106.jpg" loading="lazy" alt=""><span class="pagenum">106 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/107.jpg" loading="lazy" alt=""><span class="pagenum">107 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/108.jpg" loading="lazy" alt=""><span class="pagenum">108 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/109.jpg" loading="lazy" alt=""><span class="pagenum">109 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/110.jpg" loading="lazy" alt=""><span class="pagenum">110 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/111.jpg" loading="lazy" alt=""><span class="pagenum">111 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/112.jpg" loading="lazy" alt=""><span class="pagenum">112 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/113.jpg" loading="lazy" alt=""><span class="pagenum">113 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/114.jpg" loading="lazy" alt=""><span class="pagenum">114 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/115.jpg" loading="lazy" alt=""><span class="pagenum">115 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/116.jpg" loading="lazy" alt=""><span class="pagenum">116 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/117.jpg" loading="lazy" alt=""><span class="pagenum">117 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/118.jpg" loading="lazy" alt=""><span class="pagenum">118 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/119.jpg" loading="lazy" alt=""><span class="pagenum">119 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/120.jpg" loading="lazy" alt=""><span class="pagenum">120 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/121.jpg" loading="lazy" alt=""><span class="pagenum">121 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/122.jpg" loading="lazy" alt=""><span class="pagenum">122 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/123.jpg" loading="lazy" alt=""><span class="pagenum">123 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/124.jpg" loading="lazy" alt=""><span class="pagenum">124 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/125.jpg" loading="lazy" alt=""><span class="pagenum">125 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/126.jpg" loading="lazy" alt=""><span class="pagenum">126 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/127.jpg" loading="lazy" alt=""><span class="pagenum">127 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/128.jpg" loading="lazy" alt=""><span class="pagenum">128 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/129.jpg" loading="lazy" alt=""><span class="pagenum">129 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/130.jpg" loading="lazy" alt=""><span class="pagenum">130 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/131.jpg" loading="lazy" alt=""><span class="pagenum">131 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/132.jpg" loading="lazy" alt=""><span class="pagenum">132 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/133.jpg" loading="lazy" alt=""><span class="pagenum">133 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/134.jpg" loading="lazy" alt=""><span class="pagenum">134 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/135.jpg" loading="lazy" alt=""><span class="pagenum">135 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/136.jpg" loading="lazy" alt=""><span class="pagenum">136 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/137.jpg" loading="lazy" alt=""><span class="pagenum">137 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/138.jpg" loading="lazy" alt=""><span class="pagenum">138 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/139.jpg" loading="lazy" alt=""><span class="pagenum">139 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/140.jpg" loading="lazy" alt=""><span class="pagenum">140 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/141.jpg" loading="lazy" alt=""><span class="pagenum">141 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/142.jpg" loading="lazy" alt=""><span class="pagenum">142 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/143.jpg" loading="lazy" alt=""><span class="pagenum">143 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/144.jpg" loading="lazy" alt=""><span class="pagenum">144 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/145.jpg" loading="lazy" alt=""><span class="pagenum">145 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/146.jpg" loading="lazy" alt=""><span class="pagenum">146 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/147.jpg" loading="lazy" alt=""><span class="pagenum">147 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/148.jpg" loading="lazy" alt=""><span class="pagenum">148 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/149.jpg" loading="lazy" alt=""><span class="pagenum">149 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/150.jpg" loading="lazy" alt=""><span class="pagenum">150 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/151.jpg" loading="lazy" alt=""><span class="pagenum">151 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/152.jpg" loading="lazy" alt=""><span class="pagenum">152 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/153.jpg" loading="lazy" alt=""><span class="pagenum">153 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/154.jpg" loading="lazy" alt=""><span class="pagenum">154 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/155.jpg" loading="lazy" alt=""><span class="pagenum">155 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/156.jpg" loading="lazy" alt=""><span class="pagenum">156 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/157.jpg" loading="lazy" alt=""><span class="pagenum">157 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/158.jpg" loading="lazy" alt=""><span class="pagenum">158 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/159.jpg" loading="lazy" alt=""><span class="pagenum">159 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/160.jpg" loading="lazy" alt=""><span class="pagenum">160 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/161.jpg" loading="lazy" alt=""><span class="pagenum">161 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/162.jpg" loading="lazy" alt=""><span class="pagenum">162 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/163.jpg" loading="lazy" alt=""><span class="pagenum">163 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/164.jpg" loading="lazy" alt=""><span class="pagenum">164 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/165.jpg" loading="lazy" alt=""><span class="pagenum">165 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/166.jpg" loading="lazy" alt=""><span class="pagenum">166 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/167.jpg" loading="lazy" alt=""><span class="pagenum">167 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/168.jpg" loading="lazy" alt=""><span class="pagenum">168 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/169.jpg" loading="lazy" alt=""><span class="pagenum">169 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/170.jpg" loading="lazy" alt=""><span class="pagenum">170 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/171.jpg" loading="lazy" alt=""><span class="pagenum">171 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/172.jpg" loading="lazy" alt=""><span class="pagenum">172 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/173.jpg" loading="lazy" alt=""><span class="pagenum">173 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/174.jpg" loading="lazy" alt=""><span class="pagenum">174 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/175.jpg" loading="lazy" alt=""><span class="pagenum">175 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/176.jpg" loading="lazy" alt=""><span class="pagenum">176 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/177.jpg" loading="lazy" alt=""><span class="pagenum">177 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/178.jpg" loading="lazy" alt=""><span class="pagenum">178 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/179.jpg" loading="lazy" alt=""><span class="pagenum">179 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/180.jpg" loading="lazy" alt=""><span class="pagenum">180 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/181.jpg" loading="lazy" alt=""><span class="pagenum">181 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/182.jpg" loading="lazy" alt=""><span class="pagenum">182 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/183.jpg" loading="lazy" alt=""><span class="pagenum">183 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/184.jpg" loading="lazy" alt=""><span class="pagenum">184 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/185.jpg" loading="lazy" alt=""><span class="pagenum">185 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/186.jpg" loading="lazy" alt=""><span class="pagenum">186 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/187.jpg" loading="lazy" alt=""><span class="pagenum">187 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/188.jpg" loading="lazy" alt=""><span class="pagenum">188 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/189.jpg" loading="lazy" alt=""><span class="pagenum">189 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/190.jpg" loading="lazy" alt=""><span class="pagenum">190 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/191.jpg" loading="lazy" alt=""><span class="pagenum">191 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/192.jpg" loading="lazy" alt=""><span class="pagenum">192 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/193.jpg" loading="lazy" alt=""><span class="pagenum">193 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/194.jpg" loading="lazy" alt=""><span class="pagenum">194 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/195.jpg" loading="lazy" alt=""><span class="pagenum">195 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/196.jpg" loading="lazy" alt=""><span class="pagenum">196 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/197.jpg" loading="lazy" alt=""><span class="pagenum">197 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/198.jpg" loading="lazy" alt=""><span class="pagenum">198 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/199.jpg" loading="lazy" alt=""><span class="pagenum">199 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/200.jpg" loading="lazy" alt=""><span class="pagenum">200 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/201.jpg" loading="lazy" alt=""><span class="pagenum">201 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/202.jpg" loading="lazy" alt=""><span class="pagenum">202 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/203.jpg" loading="lazy" alt=""><span class="pagenum">203 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/204.jpg" loading="lazy" alt=""><span class="pagenum">204 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/205.jpg" loading="lazy" alt=""><span class="pagenum">205 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/206.jpg" loading="lazy" alt=""><span class="pagenum">206 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/207.jpg" loading="lazy" alt=""><span class="pagenum">207 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/208.jpg" loading="lazy" alt=""><span class="pagenum">208 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/209.jpg" loading="lazy" alt=""><span class="pagenum">209 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/210.jpg" loading="lazy" alt=""><span class="pagenum">210 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/211.jpg" loading="lazy" alt=""><span class="pagenum">211 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/212.jpg" loading="lazy" alt=""><span class="pagenum">212 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/213.jpg" loading="lazy" alt=""><span class="pagenum">213 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/214.jpg" loading="lazy" alt=""><span class="pagenum">214 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/215.jpg" loading="lazy" alt=""><span class="pagenum">215 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/216.jpg" loading="lazy" alt=""><span class="pagenum">216 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/217.jpg" loading="lazy" alt=""><span class="pagenum">217 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/218.jpg" loading="lazy" alt=""><span class="pagenum">218 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/219.jpg" loading="lazy" alt=""><span class="pagenum">219 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/220.jpg" loading="lazy" alt=""><span class="pagenum">220 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/221.jpg" loading="lazy" alt=""><span class="pagenum">221 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/222.jpg" loading="lazy" alt=""><span class="pagenum">222 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/223.jpg" loading="lazy" alt=""><span class="pagenum">223 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/224.jpg" loading="lazy" alt=""><span class="pagenum">224 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/225.jpg" loading="lazy" alt=""><span class="pagenum">225 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/226.jpg" loading="lazy" alt=""><span class="pagenum">226 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/227.jpg" loading="lazy" alt=""><span class="pagenum">227 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/228.jpg" loading="lazy" alt=""><span class="pagenum">228 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/229.jpg" loading="lazy" alt=""><span class="pagenum">229 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/230.jpg" loading="lazy" alt=""><span class="pagenum">230 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/231.jpg" loading="lazy" alt=""><span class="pagenum">231 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/232.jpg" loading="lazy" alt=""><span class="pagenum">232 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/233.jpg" loading="lazy" alt=""><span class="pagenum">233 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/234.jpg" loading="lazy" alt=""><span class="pagenum">234 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/235.jpg" loading="lazy" alt=""><span class="pagenum">235 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/236.jpg" loading="lazy" alt=""><span class="pagenum">236 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/237.jpg" loading="lazy" alt=""><span class="pagenum">237 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/238.jpg" loading="lazy" alt=""><span class="pagenum">238 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/239.jpg" loading="lazy" alt=""><span class="pagenum">239 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/240.jpg" loading="lazy" alt=""><span class="pagenum">240 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/241.jpg" loading="lazy" alt=""><span class="pagenum">241 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/242.jpg" loading="lazy" alt=""><span class="pagenum">242 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/243.jpg" loading="lazy" alt=""><span class="pagenum">243 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/244.jpg" loading="lazy" alt=""><span class="pagenum">244 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/245.jpg" loading="lazy" alt=""><span class="pagenum">245 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/246.jpg" loading="lazy" alt=""><span class="pagenum">246 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/247.jpg" loading="lazy" alt=""><span class="pagenum">247 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/248.jpg" loading="lazy" alt=""><span class="pagenum">248 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/249.jpg" loading="lazy" alt=""><span class="pagenum">249 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/250.jpg" loading="lazy" alt=""><span class="pagenum">250 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/251.jpg" loading="lazy" alt=""><span class="pagenum">251 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/252.jpg" loading="lazy" alt=""><span class="pagenum">252 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/253.jpg" loading="lazy" alt=""><span class="pagenum">253 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/254.jpg" loading="lazy" alt=""><span class="pagenum">254 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/255.jpg" loading="lazy" alt=""><span class="pagenum">255 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/256.jpg" loading="lazy" alt=""><span class="pagenum">256 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/257.jpg" loading="lazy" alt=""><span class="pagenum">257 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/258.jpg" loading="lazy" alt=""><span class="pagenum">258 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/259.jpg" loading="lazy" alt=""><span class="pagenum">259 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/260.jpg" loading="lazy" alt=""><span class="pagenum">260 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/261.jpg" loading="lazy" alt=""><span class="pagenum">261 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/262.jpg" loading="lazy" alt=""><span class="pagenum">262 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/263.jpg" loading="lazy" alt=""><span class="pagenum">263 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/264.jpg" loading="lazy" alt=""><span class="pagenum">264 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/265.jpg" loading="lazy" alt=""><span class="pagenum">265 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/266.jpg" loading="lazy" alt=""><span class="pagenum">266 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/267.jpg" loading="lazy" alt=""><span class="pagenum">267 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/268.jpg" loading="lazy" alt=""><span class="pagenum">268 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/269.jpg" loading="lazy" alt=""><span class="pagenum">269 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/270.jpg" loading="lazy" alt=""><span class="pagenum">270 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/271.jpg" loading="lazy" alt=""><span class="pagenum">271 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/272.jpg" loading="lazy" alt=""><span class="pagenum">272 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/273.jpg" loading="lazy" alt=""><span class="pagenum">273 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/274.jpg" loading="lazy" alt=""><span class="pagenum">274 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/275.jpg" loading="lazy" alt=""><span class="pagenum">275 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/276.jpg" loading="lazy" alt=""><span class="pagenum">276 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/277.jpg" loading="lazy" alt=""><span class="pagenum">277 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/278.jpg" loading="lazy" alt=""><span class="pagenum">278 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/279.jpg" loading="lazy" alt=""><span class="pagenum">279 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/280.jpg" loading="lazy" alt=""><span class="pagenum">280 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/281.jpg" loading="lazy" alt=""><span class="pagenum">281 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/282.jpg" loading="lazy" alt=""><span class="pagenum">282 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/283.jpg" loading="lazy" alt=""><span class="pagenum">283 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/284.jpg" loading="lazy" alt=""><span class="pagenum">284 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/285.jpg" loading="lazy" alt=""><span class="pagenum">285 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/286.jpg" loading="lazy" alt=""><span class="pagenum">286 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/287.jpg" loading="lazy" alt=""><span class="pagenum">287 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/288.jpg" loading="lazy" alt=""><span class="pagenum">288 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/289.jpg" loading="lazy" alt=""><span class="pagenum">289 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/290.jpg" loading="lazy" alt=""><span class="pagenum">290 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/291.jpg" loading="lazy" alt=""><span class="pagenum">291 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/292.jpg" loading="lazy" alt=""><span class="pagenum">292 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/293.jpg" loading="lazy" alt=""><span class="pagenum">293 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/294.jpg" loading="lazy" alt=""><span class="pagenum">294 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/295.jpg" loading="lazy" alt=""><span class="pagenum">295 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/296.jpg" loading="lazy" alt=""><span class="pagenum">296 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/297.jpg" loading="lazy" alt=""><span class="pagenum">297 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/298.jpg" loading="lazy" alt=""><span class="pagenum">298 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/299.jpg" loading="lazy" alt=""><span class="pagenum">299 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/300.jpg" loading="lazy" alt=""><span class="pagenum">300 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/301.jpg" loading="lazy" alt=""><span class="pagenum">301 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/302.jpg" loading="lazy" alt=""><span class="pagenum">302 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/303.jpg" loading="lazy" alt=""><span class="pagenum">303 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/304.jpg" loading="lazy" alt=""><span class="pagenum">304 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/305.jpg" loading="lazy" alt=""><span class="pagenum">305 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/306.jpg" loading="lazy" alt=""><span class="pagenum">306 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/307.jpg" loading="lazy" alt=""><span class="pagenum">307 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/308.jpg" loading="lazy" alt=""><span class="pagenum">308 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/309.jpg" loading="lazy" alt=""><span class="pagenum">309 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/310.jpg" loading="lazy" alt=""><span class="pagenum">310 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/311.jpg" loading="lazy" alt=""><span class="pagenum">311 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/312.jpg" loading="lazy" alt=""><span class="pagenum">312 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/313.jpg" loading="lazy" alt=""><span class="pagenum">313 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/314.jpg" loading="lazy" alt=""><span class="pagenum">314 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/315.jpg" loading="lazy" alt=""><span class="pagenum">315 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/316.jpg" loading="lazy" alt=""><span class="pagenum">316 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/317.jpg" loading="lazy" alt=""><span class="pagenum">317 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/318.jpg" loading="lazy" alt=""><span class="pagenum">318 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/319.jpg" loading="lazy" alt=""><span class="pagenum">319 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/320.jpg" loading="lazy" alt=""><span class="pagenum">320 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/321.jpg" loading="lazy" alt=""><span class="pagenum">321 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/322.jpg" loading="lazy" alt=""><span class="pagenum">322 / 323</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/323.jpg" loading="lazy" alt=""><span class="pagenum">323 / 323</span></div></div>
+    <div class="page" data-density="hard">
+      <div class="backcover">Puk Happy Birthday Album</div>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
+<script>
+  const bookEl = document.getElementById('book');
+  const pageFlip = new St.PageFlip(bookEl, {
+    width: 500,
+    height: 700,
+    size: 'stretch',
+    // minWidth stays well above half of maxWidth (380*2=760 > 700) -- PageFlip only
+    // ever shows a 2-page spread ("landscape" orientation) when its parent's
+    // available width is at least 2x this value, so keeping that margin healthy
+    // guarantees exactly one photo visible at a time no matter how wide the
+    // screen is, even as maxWidth/.stage's own cap below were both raised (from
+    // 460 to 700) to let the book actually grow bigger on wide/desktop screens
+    // instead of leaving huge empty backdrop margins on either side.
+    minWidth: 380,
+    maxWidth: 700,
+    minHeight: 500,
+    maxHeight: 980,
+    showCover: true,
+    usePortrait: true,
+    maxShadowOpacity: 0.5,
+    mobileScrollSupport: false,
+    flippingTime: 700
+  });
+  pageFlip.loadFromHTML(document.querySelectorAll('#book .page'));
+
+  const counter = document.getElementById('counter');
+  const totalPages = pageFlip.getPageCount();
+  function updateCounter(e) {
+    counter.textContent = (e.data + 1) + ' / ' + totalPages;
+  }
+  updateCounter({ data: 0 });
+  pageFlip.on('flip', updateCounter);
+
+  // Position the cover's title/patch overlays to match wherever the cover image
+  // actually rendered under object-fit:contain (which letterboxes rather than crops
+  // -- replicated here in JS since CSS can't expose contain's computed box to
+  // sibling elements). Re-run on load/resize/orientation change so it stays correct
+  // as the flip-book's own 'stretch' sizing responds to the viewport.
+  function layoutCover() {
+    const coverEl = document.querySelector('.cover');
+    const img = document.getElementById('coverImg');
+    if (!coverEl || !img) return;
+    const cw = coverEl.clientWidth, ch = coverEl.clientHeight;
+    const iw = parseFloat(img.dataset.iw), ih = parseFloat(img.dataset.ih);
+    if (!cw || !ch || !iw || !ih) return;
+    const containerRatio = cw / ch, imgRatio = iw / ih;
+    let rw, rh;
+    if (imgRatio > containerRatio) { rw = cw; rh = cw / imgRatio; }
+    else { rh = ch; rw = ch * imgRatio; }
+    const ox = (cw - rw) / 2, oy = (ch - rh) / 2;
+    coverEl.querySelectorAll('[data-box]').forEach(function (el) {
+      const parts = el.dataset.box.split(',').map(Number);
+      const x0 = parts[0], y0 = parts[1], x1 = parts[2], y1 = parts[3];
+      const bw = (x1 - x0) * rw, bh = (y1 - y0) * rh;
+      el.style.left = (ox + x0 * rw) + 'px';
+      el.style.top = (oy + y0 * rh) + 'px';
+      el.style.width = bw + 'px';
+      el.style.height = bh + 'px';
+      if (el.classList.contains('title-on-patch')) {
+        el.style.fontSize = Math.max(11, bh * 0.6) + 'px';
+      }
+    });
+  }
+  window.addEventListener('load', layoutCover);
+  window.addEventListener('resize', layoutCover);
+  window.addEventListener('orientationchange', layoutCover);
+  pageFlip.on('changeOrientation', layoutCover);
+  setTimeout(layoutCover, 0);
+  setTimeout(layoutCover, 300);
+  setTimeout(layoutCover, 800);
+  // The fixed-delay calls above weren't enough on iOS Safari -- the book's actual
+  // rendered size still shifted after them (address bar/URL-bar chrome collapsing
+  // post-load, and/or PageFlip's own stretch-mode resize logic settling later than
+  // expected), leaving the title patch positioned for stale dimensions. A
+  // ResizeObserver re-runs the layout on *any* actual size change to #book, no
+  // matter what caused it or when, which is what a fixed set of timeouts can't
+  // guarantee -- confirmed as the fix for a real landscape-mode iPhone screenshot
+  // where the title patch had drifted down onto "PHOTO ALBUM" instead of over it.
+  if (window.ResizeObserver) {
+    // Observe .cover itself, not #book -- PageFlip may size its internal page
+    // wrapper via a CSS technique (percentage padding-bottom for aspect ratio,
+    // rather than literal width/height) that doesn't necessarily change #book's
+    // own box, but .cover's *own* rendered box (whatever produced it) is exactly
+    // what layoutCover()'s math depends on, so observing it directly is the one
+    // target guaranteed to catch every case.
+    const coverEl0 = document.querySelector('.cover');
+    if (coverEl0) new ResizeObserver(layoutCover).observe(coverEl0);
+  }
+</script>
+</body>
+</html>
