@@ -14,9 +14,9 @@
     display:flex; justify-content:space-between; align-items:center; pointer-events:none; }
   .topbar a { color:rgba(255,255,255,.6); text-decoration:none; font-size:.8rem; pointer-events:auto; }
   .counter { color:rgba(255,255,255,.6); font-size:.8rem; }
-  .stage { height:100%; max-width:460px; margin:0 auto; display:flex; align-items:center;
+  .stage { height:100%; max-width:700px; margin:0 auto; display:flex; align-items:center;
     justify-content:center; padding:44px 10px 26px; }
-  #book { width:min(92vw, 460px); height:min(78vh, 640px); }
+  #book { width:min(92vw, 700px); height:min(80vh, 980px); }
   .page { background:#1c1c1f; overflow:hidden; }
   .page-content { width:100%; height:100%; display:flex; align-items:center; justify-content:center;
     position:relative; background-image:url('page-bg.jpg'); background-size:cover; background-position:center; }
@@ -67,9 +67,10 @@
         <div class="hint-pill">Tap or swipe to open &rarr;</div>
       </div>
     </div>
-    <div class="page" data-density="soft"><div class="page-content"><img src="full/001.jpg" loading="lazy" alt=""><span class="pagenum">1 / 3</span></div></div>
-    <div class="page" data-density="soft"><div class="page-content"><img src="full/002.jpg" loading="lazy" alt=""><span class="pagenum">2 / 3</span></div></div>
-    <div class="page" data-density="soft"><div class="page-content"><img src="full/003.jpg" loading="lazy" alt=""><span class="pagenum">3 / 3</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/001.jpg" loading="lazy" alt=""><span class="pagenum">1 / 4</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/002.jpg" loading="lazy" alt=""><span class="pagenum">2 / 4</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/003.jpg" loading="lazy" alt=""><span class="pagenum">3 / 4</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/004.jpg" loading="lazy" alt=""><span class="pagenum">4 / 4</span></div></div>
     <div class="page" data-density="hard">
       <div class="backcover">Test Album</div>
     </div>
@@ -79,18 +80,19 @@
 <script>
   const bookEl = document.getElementById('book');
   const pageFlip = new St.PageFlip(bookEl, {
-    width: 400,
-    height: 560,
+    width: 500,
+    height: 700,
     size: 'stretch',
-    minWidth: 260,
-    // maxWidth capped to match #book's own CSS cap (min(92vw,460px)) rather than
-    // leaving daylight above it -- PageFlip only ever shows a 2-page spread
-    // ("landscape" orientation) when the container is at least 2x the page's
-    // reference width; keeping this in lockstep with the CSS cap removes any
-    // ambiguity about whether that could ever be reached, guaranteeing exactly
-    // one photo visible at a time regardless of screen size.
-    maxWidth: 460,
-    minHeight: 360,
+    // minWidth stays well above half of maxWidth (380*2=760 > 700) -- PageFlip only
+    // ever shows a 2-page spread ("landscape" orientation) when its parent's
+    // available width is at least 2x this value, so keeping that margin healthy
+    // guarantees exactly one photo visible at a time no matter how wide the
+    // screen is, even as maxWidth/.stage's own cap below were both raised (from
+    // 460 to 700) to let the book actually grow bigger on wide/desktop screens
+    // instead of leaving huge empty backdrop margins on either side.
+    minWidth: 380,
+    maxWidth: 700,
+    minHeight: 500,
     maxHeight: 980,
     showCover: true,
     usePortrait: true,
