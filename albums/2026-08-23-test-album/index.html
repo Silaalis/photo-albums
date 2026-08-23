@@ -141,9 +141,29 @@
   }
   window.addEventListener('load', layoutCover);
   window.addEventListener('resize', layoutCover);
+  window.addEventListener('orientationchange', layoutCover);
   pageFlip.on('changeOrientation', layoutCover);
   setTimeout(layoutCover, 0);
   setTimeout(layoutCover, 300);
+  setTimeout(layoutCover, 800);
+  // The fixed-delay calls above weren't enough on iOS Safari -- the book's actual
+  // rendered size still shifted after them (address bar/URL-bar chrome collapsing
+  // post-load, and/or PageFlip's own stretch-mode resize logic settling later than
+  // expected), leaving the title patch positioned for stale dimensions. A
+  // ResizeObserver re-runs the layout on *any* actual size change to #book, no
+  // matter what caused it or when, which is what a fixed set of timeouts can't
+  // guarantee -- confirmed as the fix for a real landscape-mode iPhone screenshot
+  // where the title patch had drifted down onto "PHOTO ALBUM" instead of over it.
+  if (window.ResizeObserver) {
+    // Observe .cover itself, not #book -- PageFlip may size its internal page
+    // wrapper via a CSS technique (percentage padding-bottom for aspect ratio,
+    // rather than literal width/height) that doesn't necessarily change #book's
+    // own box, but .cover's *own* rendered box (whatever produced it) is exactly
+    // what layoutCover()'s math depends on, so observing it directly is the one
+    // target guaranteed to catch every case.
+    const coverEl0 = document.querySelector('.cover');
+    if (coverEl0) new ResizeObserver(layoutCover).observe(coverEl0);
+  }
 </script>
 </body>
 </html>
