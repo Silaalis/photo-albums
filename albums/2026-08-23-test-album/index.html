@@ -33,14 +33,14 @@
   .cover .sub { position:relative; font-size:.8rem; letter-spacing:.12em; text-transform:uppercase;
     color:#c9b48a; margin:0; }
   .cover .hint { position:relative; margin-top:26px; font-size:.78rem; color:rgba(241,233,222,.65); }
-  .cover-bg-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
-    object-position:center top; }
-  .patch { position:absolute; filter:blur(3px); z-index:1; }
-  .title-on-patch { position:absolute; z-index:2; display:flex; align-items:center; justify-content:center;
+  .cover-bg-img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
+    object-position:center center; }
+  .patch { position:absolute; left:0; top:0; width:0; height:0; filter:blur(3px); z-index:1; }
+  .title-on-patch { position:absolute; left:0; top:0; width:0; height:0; z-index:2; display:flex;
+    align-items:center; justify-content:center; overflow:hidden;
     font-family:Georgia,"Times New Roman",serif; font-weight:700; color:#e7cd97;
     text-shadow:0 1px 0 rgba(255,255,255,.15), 0 -1px 1px rgba(0,0,0,.6);
-    letter-spacing:.02em; line-height:1.05; padding:2%; text-align:center;
-    font-size:clamp(1rem, 5.8vw, 1.9rem); }
+    letter-spacing:.02em; line-height:1.05; padding:2%; text-align:center; }
   .hint-pill { position:absolute; z-index:2; bottom:4%; left:50%; transform:translateX(-50%);
     background:rgba(0,0,0,.55); color:#f1e9de; font-size:.72rem; padding:6px 14px;
     border-radius:20px; white-space:nowrap; }
@@ -58,9 +58,9 @@
   <div id="book">
     <div class="page" data-density="hard">
       <div class="cover">
-        <img class="cover-bg-img" src="cover-bg.jpg" alt="">
-        <div class="patch" style="left:26.97%;top:15.91%;width:60.49%;height:10.06%;background:linear-gradient(135deg, rgb(103,75,61), rgb(65,38,21));"></div>
-        <div class="title-on-patch" style="left:26.97%;top:15.91%;width:60.49%;height:10.06%;">Test Album</div>
+        <img class="cover-bg-img" id="coverImg" src="cover-bg.jpg" data-iw="686" data-ih="616" alt="">
+        <div class="patch" data-box="0.2697,0.1591,0.8746,0.2597" style="background:linear-gradient(135deg, rgb(103,75,61), rgb(65,38,21))"></div>
+        <div class="title-on-patch" data-box="0.2697,0.1591,0.8746,0.2597">Test Album</div>
         <div class="hint-pill">Tap or swipe to open &rarr;</div>
       </div>
     </div>
@@ -98,6 +98,42 @@
   }
   updateCounter({ data: 0 });
   pageFlip.on('flip', updateCounter);
+
+  // Position the cover's title/patch overlays to match wherever the cover image
+  // actually rendered under object-fit:contain (which letterboxes rather than crops
+  // -- replicated here in JS since CSS can't expose contain's computed box to
+  // sibling elements). Re-run on load/resize/orientation change so it stays correct
+  // as the flip-book's own 'stretch' sizing responds to the viewport.
+  function layoutCover() {
+    const coverEl = document.querySelector('.cover');
+    const img = document.getElementById('coverImg');
+    if (!coverEl || !img) return;
+    const cw = coverEl.clientWidth, ch = coverEl.clientHeight;
+    const iw = parseFloat(img.dataset.iw), ih = parseFloat(img.dataset.ih);
+    if (!cw || !ch || !iw || !ih) return;
+    const containerRatio = cw / ch, imgRatio = iw / ih;
+    let rw, rh;
+    if (imgRatio > containerRatio) { rw = cw; rh = cw / imgRatio; }
+    else { rh = ch; rw = ch * imgRatio; }
+    const ox = (cw - rw) / 2, oy = (ch - rh) / 2;
+    coverEl.querySelectorAll('[data-box]').forEach(function (el) {
+      const parts = el.dataset.box.split(',').map(Number);
+      const x0 = parts[0], y0 = parts[1], x1 = parts[2], y1 = parts[3];
+      const bw = (x1 - x0) * rw, bh = (y1 - y0) * rh;
+      el.style.left = (ox + x0 * rw) + 'px';
+      el.style.top = (oy + y0 * rh) + 'px';
+      el.style.width = bw + 'px';
+      el.style.height = bh + 'px';
+      if (el.classList.contains('title-on-patch')) {
+        el.style.fontSize = Math.max(11, bh * 0.6) + 'px';
+      }
+    });
+  }
+  window.addEventListener('load', layoutCover);
+  window.addEventListener('resize', layoutCover);
+  pageFlip.on('changeOrientation', layoutCover);
+  setTimeout(layoutCover, 0);
+  setTimeout(layoutCover, 300);
 </script>
 </body>
 </html>
