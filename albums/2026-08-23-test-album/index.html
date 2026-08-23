@@ -81,7 +81,13 @@
     height: 560,
     size: 'stretch',
     minWidth: 260,
-    maxWidth: 700,
+    // maxWidth capped to match #book's own CSS cap (min(92vw,460px)) rather than
+    // leaving daylight above it -- PageFlip only ever shows a 2-page spread
+    // ("landscape" orientation) when the container is at least 2x the page's
+    // reference width; keeping this in lockstep with the CSS cap removes any
+    // ambiguity about whether that could ever be reached, guaranteeing exactly
+    // one photo visible at a time regardless of screen size.
+    maxWidth: 460,
     minHeight: 360,
     maxHeight: 980,
     showCover: true,
