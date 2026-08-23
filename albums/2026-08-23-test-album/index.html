@@ -2,38 +2,91 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Test Album</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@5/dist/photoswipe.css">
 <style>
   :root { color-scheme: dark; }
-  body { margin:0; padding:20px 16px 40px; background:#111; color:#eee;
-         font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; }
-  h1 { font-size:1.25rem; font-weight:600; margin:0 0 4px; }
-  .meta { color:#999; font-size:.85rem; margin:0 0 18px; }
-  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(110px,1fr)); gap:6px; }
-  .grid a { display:block; aspect-ratio:1/1; overflow:hidden; border-radius:8px; background:#222; }
-  .grid img { width:100%; height:100%; object-fit:cover; display:block; }
-  a.back { color:#7ab8ff; text-decoration:none; font-size:.9rem; }
+  * { box-sizing: border-box; }
+  html, body { margin:0; height:100%; background:#0b0b0d;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; overscroll-behavior:none; }
+  .topbar { position:fixed; top:0; left:0; right:0; z-index:5; padding:10px 14px;
+    display:flex; justify-content:space-between; align-items:center; pointer-events:none; }
+  .topbar a { color:rgba(255,255,255,.6); text-decoration:none; font-size:.8rem; pointer-events:auto; }
+  .counter { color:rgba(255,255,255,.6); font-size:.8rem; }
+  .stage { height:100%; display:flex; align-items:center; justify-content:center; padding:44px 10px 26px; }
+  #book { width:min(92vw, 460px); height:min(78vh, 640px); }
+  .page { background:#1c1c1f; overflow:hidden; }
+  .page-content { width:100%; height:100%; display:flex; align-items:center; justify-content:center;
+    position:relative; background:#000; }
+  .page-content img { max-width:100%; max-height:100%; object-fit:contain; display:block; }
+  .pagenum { position:absolute; bottom:8px; right:12px; color:rgba(255,255,255,.55);
+    font-size:.72rem; letter-spacing:.04em; }
+  .cover { width:100%; height:100%; display:flex; flex-direction:column; align-items:center;
+    justify-content:center; text-align:center; padding:32px 22px; position:relative;
+    background:linear-gradient(160deg,#2b2320,#141210 65%); color:#f1e9de;
+    border:1px solid rgba(255,255,255,.06); }
+  .cover::before { content:""; position:absolute; inset:10px; border:1px solid rgba(230,200,150,.28); pointer-events:none; }
+  .cover-photo { position:absolute; inset:0; background-size:cover; background-position:center;
+    opacity:.22; filter:blur(1px) saturate(.7); }
+  .cover h1 { position:relative; font-family:Georgia,"Times New Roman",serif; font-weight:600;
+    font-size:1.6rem; line-height:1.3; margin:0 0 10px; letter-spacing:.01em; }
+  .cover .sub { position:relative; font-size:.8rem; letter-spacing:.12em; text-transform:uppercase;
+    color:#c9b48a; margin:0; }
+  .cover .hint { position:relative; margin-top:26px; font-size:.78rem; color:rgba(241,233,222,.65); }
+  .backcover { width:100%; height:100%; display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(160deg,#2b2320,#141210 65%); color:rgba(241,233,222,.5);
+    font-family:Georgia,"Times New Roman",serif; font-size:.95rem; letter-spacing:.06em; }
 </style>
 </head>
 <body>
-<p><a class="back" href="../../index.html">&larr; All albums</a></p>
-<h1>Test Album</h1>
-<p class="meta">3 photos</p>
-<div class="grid" id="gallery">
-  <a href="full/001.jpg" data-pswp-width="1600" data-pswp-height="1200"><img src="thumbs/001.jpg" loading="lazy" alt=""></a>
-  <a href="full/002.jpg" data-pswp-width="1600" data-pswp-height="1200"><img src="thumbs/002.jpg" loading="lazy" alt=""></a>
-  <a href="full/003.jpg" data-pswp-width="1600" data-pswp-height="1200"><img src="thumbs/003.jpg" loading="lazy" alt=""></a>
+<div class="topbar">
+  <a href="../../index.html">&larr; All albums</a>
+  <span class="counter" id="counter"></span>
 </div>
-<script type="module">
-  import PhotoSwipeLightbox from 'https://cdn.jsdelivr.net/npm/photoswipe@5/dist/photoswipe-lightbox.esm.js';
-  const lightbox = new PhotoSwipeLightbox({
-    gallery: '#gallery',
-    children: 'a',
-    pswpModule: () => import('https://cdn.jsdelivr.net/npm/photoswipe@5/dist/photoswipe.esm.js')
+<div class="stage">
+  <div id="book">
+    <div class="page" data-density="hard">
+      <div class="cover">
+        <div class="cover-photo" style="background-image:url('thumbs/001.jpg')"></div>
+        <h1>Test Album</h1>
+        <p class="sub">3 Photos</p>
+        <p class="hint">Tap or swipe to open &rarr;</p>
+      </div>
+    </div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/001.jpg" loading="lazy" alt=""><span class="pagenum">1 / 3</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/002.jpg" loading="lazy" alt=""><span class="pagenum">2 / 3</span></div></div>
+    <div class="page" data-density="soft"><div class="page-content"><img src="full/003.jpg" loading="lazy" alt=""><span class="pagenum">3 / 3</span></div></div>
+    <div class="page" data-density="hard">
+      <div class="backcover">Test Album</div>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
+<script>
+  const bookEl = document.getElementById('book');
+  const pageFlip = new St.PageFlip(bookEl, {
+    width: 400,
+    height: 560,
+    size: 'stretch',
+    minWidth: 260,
+    maxWidth: 700,
+    minHeight: 360,
+    maxHeight: 980,
+    showCover: true,
+    usePortrait: true,
+    maxShadowOpacity: 0.5,
+    mobileScrollSupport: false,
+    flippingTime: 700
   });
-  lightbox.init();
+  pageFlip.loadFromHTML(document.querySelectorAll('#book .page'));
+
+  const counter = document.getElementById('counter');
+  const totalPages = pageFlip.getPageCount();
+  function updateCounter(e) {
+    counter.textContent = (e.data + 1) + ' / ' + totalPages;
+  }
+  updateCounter({ data: 0 });
+  pageFlip.on('flip', updateCounter);
 </script>
 </body>
 </html>
